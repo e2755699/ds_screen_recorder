@@ -43,6 +43,7 @@ dependencies:
   bot_toast: ^4.0.1
   path_provider: ^2.0.2
   preference_list: ^0.0.1
+  ffmpeg_kit_flutter: ^5.1.0
 
 dev_dependencies:
   flutter_test:
