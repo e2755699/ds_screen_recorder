@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
-abstract class ScreenRecorder {
+import 'mixin/path_helper.dart';
+
+abstract class ScreenRecorder with PathHelper{
   late Process _process;
   final ValueNotifier<String> savePath = ValueNotifier("");
 
   Future<void> start({required String fileName}) async {
-    savePath.value = await getSavePath(fileName, "mp4");
+    savePath.value = await genSavePath(fileName, "mp4");
   }
 
   Future<String> stop();
@@ -22,12 +23,6 @@ abstract class ScreenRecorder {
       throw MissingPluginException("Platform :${Platform.operatingSystem}");
     }
     throw MissingPluginException("Platform :${Platform.operatingSystem}");
-  }
-
-  Future<String> getSavePath(String fileName, String fileType) async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    fileName = '$fileName-${DateTime.now().millisecondsSinceEpoch}.$fileType';
-    return '${directory.path}/$fileName';
   }
 }
 
